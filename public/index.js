@@ -1,6 +1,17 @@
 let transactions = [];
 let myChart;
 
+let db
+const request = indexedDB.open('transactionDB', 1)
+
+//When transaction is successfull
+
+
+
+
+
+
+
 fetch("/api/transaction")
   .then(response => {
     return response.json();
