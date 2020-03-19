@@ -9,7 +9,22 @@ const request = indexedDB.open('transactionDB', 1)
 
 
 
+// scales out database if not built already
+request.onupgradeneeded = event => {
+  const db = event.target.result
+  const objectStore = db.createObjectStore('transaction', { autoIncrement: true })
+  objectStore.createIndex('transaction', 'transaction')
+}
 
+// when the request is succesfull
+request.onsuccess = event => {
+  db = event.target.result 
+}
+
+// when the request errors out
+request.onerror = event => {
+  console.log('db error')
+}
 
 
 fetch("/api/transaction")
